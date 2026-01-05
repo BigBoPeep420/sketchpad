@@ -22,6 +22,7 @@ body{
     padding: 20px 40px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     border-bottom-style: solid;
 }
 #header #title {
@@ -34,4 +35,16 @@ body{
     padding: 20px;
     border-top-style: solid;
     border-width: 1px;
+}
+#pad{
+    background-color: black;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    justify-self: center;
+    width: 500px;
+    height: 500px;
+}
+.pixel{
+    background-color: rgb(255, 255, 255);
 }
