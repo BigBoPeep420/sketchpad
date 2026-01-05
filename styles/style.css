@@ -48,3 +48,7 @@ body{
 .pixel{
     background-color: rgb(255, 255, 255);
 }
+#palette{
+    display: flex;
+    flex-wrap: wrap;
+}
