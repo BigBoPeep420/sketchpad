@@ -36,6 +36,12 @@ body{
     border-top-style: solid;
     border-width: 1px;
 }
+#scechy{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 #pad{
     background-color: black;
     display: flex;
@@ -48,7 +54,17 @@ body{
 .pixel{
     background-color: rgb(255, 255, 255);
 }
+#padControls{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 4%;
+}
 #palette{
     display: flex;
     flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex: 0 0 auto;
+    width: 400px;
 }
