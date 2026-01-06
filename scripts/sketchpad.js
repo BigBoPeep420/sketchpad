@@ -4,7 +4,9 @@ const scechyPad = scechy.querySelector("#pad");
 const padControls = scechy.querySelector("#padControls");
 const palette = padControls.querySelector("#palette");
 const resizeModal = document.querySelector("#resizeModal");
+const resizeGridDisplay = resizeModal.querySelector("#gridSize");
 let isDrawing = false;
+let gridSize = 16;
 const colors = ["#000000", "#1D2B53", "#7E2553", "#008751", "#AB5236", 
     "#5F574F", "#C2C3C7", "#FFF1E8", "#FF004D", "#FFA300", "#FFEC27",
     "#00E436", "#29ADFF", "#83769C", "#FF77A8", "#FFCCAA"]
@@ -13,7 +15,7 @@ const colors = ["#000000", "#1D2B53", "#7E2553", "#008751", "#AB5236",
 fillPalette();
 let selectedColor = palette.firstChild;
 selectedColor.classList.toggle("selectedSwatch");
-fillPad(16);
+fillPad(gridSize);
 //End Palette & Default Canvas -- Do Not Move
 
 //Event Listeners
@@ -52,11 +54,26 @@ padControls.querySelector("#resize").onclick = () => {
 resizeModal.querySelector("#close").onclick = () => {
     resizeModal.style.display = "none";
 }
+resizeModal.querySelector("#submit").onclick = () => {
+    gridSize = resizeModal.querySelector("#sizeSlider").value;
+    clearPad();
+    fillPad(gridSize);
+    resizeModal.style.display = "none";
+}
 window.onclick = (e) => {
     if(e.target == resizeModal){
         resizeModal.style.display = "none";
     }
 }
+padControls.querySelector("#clear").onclick = () => {
+    clearPad();
+    fillPad(gridSize);
+}
+resizeModal.querySelector("#sizeSlider").oninput = () => {
+    let size = resizeModal.querySelector("#sizeSlider").value;
+    resizeGridDisplay.textContent = size + " x " + size;
+}
+
 
 //Functions
 function clearPad(){
