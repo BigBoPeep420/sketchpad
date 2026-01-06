@@ -18,6 +18,10 @@
             <div id="pad"></div>
             <div id="padControls">
                 <div id="palette"></div>
+                <div id="buttons">
+                    <button id="clear">Clear</button>
+                    <button id="resize">Resize</button>
+                </div>
             </div>
         </div>
 
@@ -25,5 +29,26 @@
             <p>Copyright © Lane Robey 2026</p>
         </div>
     </div>
+
+
+
+    <div id="resizeModal" class="modal">
+        <div id="content">
+            <div id="header">
+                <p id="text">Resize Canvas</p>
+                <button id="close">&times;</button>
+            </div>
+            <div id="body">
+                <input type="range" id="sizeSlider" name="sizeSlider" min="2" max="100" step="1">
+                <p>Resizing will clear the canvas!</p>
+            </div>
+            <div id="footer">
+                <p id="gridSize">16 x 16</p>
+                <button id="submit">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+
 </body>
 </html>

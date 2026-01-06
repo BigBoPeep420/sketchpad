@@ -1,14 +1,64 @@
+//Setup Global Variables
 const scechy = document.querySelector("#scechy");
 const scechyPad = scechy.querySelector("#pad");
 const padControls = scechy.querySelector("#padControls");
 const palette = padControls.querySelector("#palette");
+const resizeModal = document.querySelector("#resizeModal");
 let isDrawing = false;
-let selectedColor = "#000000";
-
 const colors = ["#000000", "#1D2B53", "#7E2553", "#008751", "#AB5236", 
     "#5F574F", "#C2C3C7", "#FFF1E8", "#FF004D", "#FFA300", "#FFEC27",
     "#00E436", "#29ADFF", "#83769C", "#FF77A8", "#FFCCAA"]
 
+//Setup Palette & Default Canvas -- Do Not Move
+fillPalette();
+let selectedColor = palette.firstChild;
+selectedColor.classList.toggle("selectedSwatch");
+fillPad(16);
+//End Palette & Default Canvas -- Do Not Move
+
+//Event Listeners
+scechyPad.addEventListener("dragstart", (e) => {
+    e.preventDefault();
+})
+document.body.addEventListener("mousedown", (e) => {
+    isDrawing = true;
+})
+document.body.addEventListener("mouseup", (e) => {
+    isDrawing = false;
+})
+scechyPad.addEventListener("mouseover", (e) => {
+    if(isDrawing && e.target.classList.contains("pixel")){
+        e.target.style.backgroundColor = selectedColor.dataset.color;
+    }
+})
+scechyPad.addEventListener("mousedown", (e) => {
+    e.preventDefault();
+    if(e.target.classList.contains("pixel")){
+        e.target.style.backgroundColor = selectedColor.dataset.color;
+    }
+})
+palette.addEventListener("click", (e) => {
+    if(e.target.classList.contains("swatch")){
+        selectedColor.classList.toggle("selectedSwatch");
+        selectedColor = e.target;
+        selectedColor.classList.toggle("selectedSwatch");
+    }
+})
+
+//Button Logic
+padControls.querySelector("#resize").onclick = () => {
+    resizeModal.style.display = "block";
+}
+resizeModal.querySelector("#close").onclick = () => {
+    resizeModal.style.display = "none";
+}
+window.onclick = (e) => {
+    if(e.target == resizeModal){
+        resizeModal.style.display = "none";
+    }
+}
+
+//Functions
 function clearPad(){
     while(scechyPad.firstChild){
         scechyPad.removeChild(scechyPad.firstChild);
@@ -42,33 +92,3 @@ function fillPalette(){
         palette.appendChild(swatch);
     })
 }
-
-
-fillPalette();
-scechyPad.addEventListener("dragstart", (e) => {
-    e.preventDefault();
-})
-document.body.addEventListener("mousedown", (e) => {
-    isDrawing = true;
-})
-document.body.addEventListener("mouseup", (e) => {
-    isDrawing = false;
-})
-scechyPad.addEventListener("mouseover", (e) => {
-    if(isDrawing && e.target.classList.contains("pixel")){
-        e.target.style.backgroundColor = selectedColor;
-    }
-})
-scechyPad.addEventListener("mousedown", (e) => {
-    e.preventDefault();
-    if(e.target.classList.contains("pixel")){
-        e.target.style.backgroundColor = selectedColor;
-    }
-})
-palette.addEventListener("click", (e) => {
-    if(e.target.classList.contains("swatch")){
-        selectedColor = e.target.dataset.color;
-    }
-})
-
-fillPad(16);
