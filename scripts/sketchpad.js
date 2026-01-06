@@ -31,12 +31,20 @@ document.body.addEventListener("mouseup", (e) => {
 scechyPad.addEventListener("mouseover", (e) => {
     if(isDrawing && e.target.classList.contains("pixel")){
         e.target.style.backgroundColor = selectedColor.dataset.color;
+        let opCur = parseFloat(e.target.dataset.opacity);
+        let opNew = Math.min(Math.max(opCur + 0.1, 0), 1);
+        e.target.style.opacity = opNew;
+        e.target.dataset.opacity = opNew;
     }
 })
 scechyPad.addEventListener("mousedown", (e) => {
     e.preventDefault();
     if(e.target.classList.contains("pixel")){
         e.target.style.backgroundColor = selectedColor.dataset.color;
+        let opCur = parseFloat(e.target.dataset.opacity);
+        let opNew = Math.min(Math.max(opCur + 0.1, 0), 1);
+        e.target.style.opacity = opNew;
+        e.target.dataset.opacity = opNew;
     }
 })
 palette.addEventListener("click", (e) => {
@@ -84,6 +92,7 @@ function clearPad(){
 function createPixel(){
     let pix = document.createElement("div");
     pix.classList.add("pixel");
+    pix.dataset.opacity = 0;
     return pix;
 }
 function fillPad(gridSize){
